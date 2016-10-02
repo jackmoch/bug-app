@@ -1,5 +1,10 @@
 'use strict';
 
+const bugs = [
+	{id: 1, status: 'Open', priority: 'P2', owner: 'Ravan', title: 'App crashes on open'},
+	{id: 2, status: 'New',priority: 'P2', owner: 'Eddied', title: 'Misaligned border on panel'}
+]
+
 const BugFilter = React.createClass({
 	render: function() {
 		return(
@@ -24,6 +29,13 @@ const BugRow = React.createClass({
 
 const BugTable = React.createClass({
 	render: function() {
+
+		const BugNodes = this.props.bugs.map(function(bug) {
+			return(
+				<BugRow id={bug.id} status={bug.status} priority={bug.priority} owner={bug.owner} title={bug.title} />
+			)
+		})
+
 		return (
 			<table>
 				<thead>
@@ -36,8 +48,7 @@ const BugTable = React.createClass({
 					</tr>
 				</thead>
 				<tbody>
-					<BugRow id={1} priority="P1" status="Open" owner="Ravan" title="App crashes on open"  />
-					<BugRow id={2} priority="P2" status="New" owner="Eddie" title="Misaligned border on panel"  />
+					{BugNodes}
 				</tbody>
 			</table>
 		)
@@ -59,7 +70,7 @@ const BugList = React.createClass({
 				<h1>Bug Tracker</h1>
 				<BugFilter />
 				<hr />
-				<BugTable />
+				<BugTable bugs={bugs} />
 				<hr />
 				<BugAdd />
 			</div>
