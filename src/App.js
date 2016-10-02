@@ -56,6 +56,7 @@ const BugTable = React.createClass({
 })
 
 const BugAdd = React.createClass({
+
 	render: function() {
 		return(
 			<div>Will be a form to add bugs</div>
@@ -69,6 +70,17 @@ const BugList = React.createClass({
 	  return {bugs: bugs}
 	},
 
+	testNewBug: function() {
+		const nextId = this.state.bugs.length + 1
+		this.addBug({id: nextId, priority: 'P2', status:'New', owner:'Pieta', title:'Warning on console'})
+	},
+
+	addBug: function(bugObj) {
+		const bugsModified = this.state.bugs.slice()
+		bugsModified.push(bugObj)
+		this.setState({bugs: bugsModified})
+	},
+ 
 	render: function() {
 		return(
 			<div>
@@ -78,6 +90,7 @@ const BugList = React.createClass({
 				<BugTable bugs={this.state.bugs} />
 				<hr />
 				<BugAdd />
+				<button onClick={this.testNewBug}>Test</button>
 			</div>
 		)
 	}
