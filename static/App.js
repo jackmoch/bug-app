@@ -1,57 +1,131 @@
 'use strict';
 
 const BugFilter = React.createClass({
-	displayName: 'BugFilter',
+	displayName: "BugFilter",
 
 	render: function () {
 		return React.createElement(
-			'div',
+			"div",
 			null,
-			'A way to filter bugs'
+			"Will be a filter bugs"
+		);
+	}
+});
+
+const BugRow = React.createClass({
+	displayName: "BugRow",
+
+	render: function () {
+		return React.createElement(
+			"tr",
+			null,
+			React.createElement(
+				"td",
+				null,
+				this.props.id
+			),
+			React.createElement(
+				"td",
+				null,
+				this.props.status
+			),
+			React.createElement(
+				"td",
+				null,
+				this.props.priority
+			),
+			React.createElement(
+				"td",
+				null,
+				this.props.owner
+			),
+			React.createElement(
+				"td",
+				null,
+				this.props.title
+			)
 		);
 	}
 });
 
 const BugTable = React.createClass({
-	displayName: 'BugTable',
+	displayName: "BugTable",
 
 	render: function () {
 		return React.createElement(
-			'div',
+			"table",
 			null,
-			'Will be a table bugs'
+			React.createElement(
+				"thead",
+				null,
+				React.createElement(
+					"tr",
+					null,
+					React.createElement(
+						"th",
+						null,
+						"Id"
+					),
+					React.createElement(
+						"th",
+						null,
+						"Status"
+					),
+					React.createElement(
+						"th",
+						null,
+						"Priority"
+					),
+					React.createElement(
+						"th",
+						null,
+						"Owner"
+					),
+					React.createElement(
+						"th",
+						null,
+						"Title"
+					)
+				)
+			),
+			React.createElement(
+				"tbody",
+				null,
+				React.createElement(BugRow, { id: 1, priority: "P1", status: "Open", owner: "Ravan", title: "App crashes on open" }),
+				React.createElement(BugRow, { id: 2, priority: "P2", status: "New", owner: "Eddie", title: "Misaligned border on panel" })
+			)
 		);
 	}
 });
 
 const BugAdd = React.createClass({
-	displayName: 'BugAdd',
+	displayName: "BugAdd",
 
 	render: function () {
 		return React.createElement(
-			'div',
+			"div",
 			null,
-			'Will be a form to add bugs'
+			"Will be a form to add bugs"
 		);
 	}
 });
 
 const BugList = React.createClass({
-	displayName: 'BugList',
+	displayName: "BugList",
 
 	render: function () {
 		return React.createElement(
-			'div',
+			"div",
 			null,
 			React.createElement(
-				'h1',
+				"h1",
 				null,
-				'Bug Tracker'
+				"Bug Tracker"
 			),
 			React.createElement(BugFilter, null),
-			React.createElement('hr', null),
+			React.createElement("hr", null),
 			React.createElement(BugTable, null),
-			React.createElement('hr', null),
+			React.createElement("hr", null),
 			React.createElement(BugAdd, null)
 		);
 	}
