@@ -66,9 +66,7 @@ const BugAdd = React.createClass({
 const BugList = React.createClass({
 
 	getInitialState: function() {
-	  return {
-	  	{bugs: bugs}
-	  };
+	  return {bugs: bugs}
 	},
 
 	render: function() {
