@@ -59,9 +59,24 @@ const BugAdd = React.createClass({
 
 	render: function() {
 		return(
-			<div>Will be a form to add bugs</div>
+			<div>
+				<form name="bugAdd">
+					<input type="text" name="owner" placeholder="Owner" />
+					<input type="text" name="title" placeholder="Title" />
+					<button onClick={this.handleSubmit}>Add Bug</button>
+				</form>
+			</div>
 		)
+	},
+
+	handleSubmit: function(e) {
+		e.preventDefault()
+		const form = document.forms.bugAdd
+		this.props.addBug({owner: form.owner.value, title: form.title.value, status: "New", priority: "P1"})
+		form.owner.value = ""
+		form.title.value = ""
 	}
+
 })
 
 const BugList = React.createClass({
@@ -70,13 +85,9 @@ const BugList = React.createClass({
 	  return {bugs: bugs}
 	},
 
-	testNewBug: function() {
-		const nextId = this.state.bugs.length + 1
-		this.addBug({id: nextId, priority: 'P2', status:'New', owner:'Pieta', title:'Warning on console'})
-	},
-
 	addBug: function(bugObj) {
 		const bugsModified = this.state.bugs.slice()
+		bugObj.id = this.state.bugs.length + 1
 		bugsModified.push(bugObj)
 		this.setState({bugs: bugsModified})
 	},
@@ -89,11 +100,10 @@ const BugList = React.createClass({
 				<hr />
 				<BugTable bugs={this.state.bugs} />
 				<hr />
-				<BugAdd />
-				<button onClick={this.testNewBug}>Test</button>
+				<BugAdd addBug={this.addBug} />
 			</div>
 		)
-	}
+	},
 })
 
 ReactDOM
