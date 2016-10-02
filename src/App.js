@@ -64,13 +64,20 @@ const BugAdd = React.createClass({
 })
 
 const BugList = React.createClass({
+
+	getInitialState: function() {
+	  return {
+	  	{bugs: bugs}
+	  };
+	},
+
 	render: function() {
 		return(
 			<div>
 				<h1>Bug Tracker</h1>
 				<BugFilter />
 				<hr />
-				<BugTable bugs={bugs} />
+				<BugTable bugs={this.state.bugs} />
 				<hr />
 				<BugAdd />
 			</div>
