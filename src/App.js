@@ -81,6 +81,7 @@ const BugList = React.createClass({
 	},
 
 	addBug: function(bugObj) {
+		console.log(bugObj)
 
 		$.ajax({
 			type: 'POST',
@@ -88,19 +89,15 @@ const BugList = React.createClass({
 			contentType: 'application/json',
 			data: JSON.stringify(bugObj),
 			success: function (data) {
+				console.log(data)
 				const bug = data
-				const bugsModified = this.state.bugs.concat(bugObj)
+				const bugsModified = this.state.bugs.concat(bug)
 				this.setState({bugs: bugsModified})
 			}.bind(this),
 			error: function (xhr, status, err) {
 				console.log('Error adding bug:', err)
 			}
 		})
-
-		const bugsModified = this.state.bugs.slice()
-		bugObj.id = this.state.bugs.length + 1
-		bugsModified.push(bugObj)
-		this.setState({bugs: bugsModified})
 	},
 
 	componentDidMount: function() {
