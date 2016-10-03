@@ -1,3 +1,3 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-babel --presets react src --watch --out-dir static
+node_modules/.bin/babel --presets react src --watch --out-dir static
