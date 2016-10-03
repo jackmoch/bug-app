@@ -1,10 +1,5 @@
 'use strict';
 
-// const bugs = [
-// 	{id: 1, status: 'Open', priority: 'P2', owner: 'Ravan', title: 'App crashes on open'},
-// 	{id: 2, status: 'New',priority: 'P2', owner: 'Eddied', title: 'Misaligned border on panel'}
-// ]
-
 const BugFilter = React.createClass({
 	render: function() {
 		return(
@@ -86,6 +81,22 @@ const BugList = React.createClass({
 	},
 
 	addBug: function(bugObj) {
+
+		$.ajax({
+			type: 'POST',
+			url: '/api/bugs',
+			contentType: 'application/json',
+			data: JSON.stringify(bugObj),
+			success: function (data) {
+				const bug = data
+				const bugsModified = this.state.bugs.concat(bugObj)
+				this.setState({bugs: bugsModified})
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.log('Error adding bug:', err)
+			}
+		})
+
 		const bugsModified = this.state.bugs.slice()
 		bugObj.id = this.state.bugs.length + 1
 		bugsModified.push(bugObj)
