@@ -4,13 +4,8 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const $ = require('jquery')
 
-const BugFilter = React.createClass({
-	render: function() {
-		return(
-			<div>Will be a filter bugs</div>
-		)
-	}
-})
+const BugFilter = require('./BugFilter')
+const BugAdd = require('./BugAdd')
 
 const BugRow = React.createClass({
 	render: function() {
@@ -54,29 +49,6 @@ const BugTable = React.createClass({
 	}
 })
 
-const BugAdd = React.createClass({
-
-	render: function() {
-		return(
-			<div>
-				<form name="bugAdd">
-					<input type="text" name="owner" placeholder="Owner" />
-					<input type="text" name="title" placeholder="Title" />
-					<button onClick={this.handleSubmit}>Add Bug</button>
-				</form>
-			</div>
-		)
-	},
-
-	handleSubmit: function(e) {
-		e.preventDefault()
-		const form = document.forms.bugAdd
-		this.props.addBug({owner: form.owner.value, title: form.title.value, status: "New", priority: "P1"})
-		form.owner.value = ""
-		form.title.value = ""
-	}
-
-})
 
 const BugList = React.createClass({
 
@@ -124,8 +96,4 @@ const BugList = React.createClass({
 	},
 })
 
-ReactDOM
-	.render(
-    <BugList />,
-    document.getElementById('main')
-	)
+module.exports = BugList
