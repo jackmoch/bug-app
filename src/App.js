@@ -1,9 +1,9 @@
 'use strict';
 
-const bugs = [
-	{id: 1, status: 'Open', priority: 'P2', owner: 'Ravan', title: 'App crashes on open'},
-	{id: 2, status: 'New',priority: 'P2', owner: 'Eddied', title: 'Misaligned border on panel'}
-]
+// const bugs = [
+// 	{id: 1, status: 'Open', priority: 'P2', owner: 'Ravan', title: 'App crashes on open'},
+// 	{id: 2, status: 'New',priority: 'P2', owner: 'Eddied', title: 'Misaligned border on panel'}
+// ]
 
 const BugFilter = React.createClass({
 	render: function() {
@@ -82,7 +82,7 @@ const BugAdd = React.createClass({
 const BugList = React.createClass({
 
 	getInitialState: function() {
-	  return {bugs: bugs}
+	  return {bugs: []}
 	},
 
 	addBug: function(bugObj) {
@@ -90,6 +90,12 @@ const BugList = React.createClass({
 		bugObj.id = this.state.bugs.length + 1
 		bugsModified.push(bugObj)
 		this.setState({bugs: bugsModified})
+	},
+
+	componentDidMount: function() {
+		$.ajax('/api/bugs').done(function(data) {
+			this.setState({bugs: data})
+		}.bind(this))
 	},
  
 	render: function() {
