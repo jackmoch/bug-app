@@ -48,7 +48,7 @@ app.put('/api/bugs/:id', (req, res) => {
 	const bug = req.body
 	console.log('Modifying bug:', req.params.id, bug)
 	const oid = ObjectID(req.params.id)
-	db.collection('bugs').updateOne({_id: oid}, bug, function(err, result) => {
+	db.collection('bugs').updateOne({_id: oid}, bug, function(err, result) {
 		db.collection('bugs').find({_id: oid}).next(function(err, doc) {
 			res.json(doc)
 		})
