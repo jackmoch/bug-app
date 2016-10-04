@@ -83,12 +83,19 @@ const BugList = React.createClass({
 			this.setState({bugs: data})
 		}.bind(this))
 	},
+
+	changeFilter: function(newFilter) {
+		console.log(newFilter)
+		console.log('WITH PARAM',$.param(newFilter))
+		this.props.history.push({search: '?' + $.param(newFilter)})
+		this.loadData(newFilter)
+	},
  
 	render: function() {
 		return(
 			<div>
 				<h1>Bug Tracker</h1>
-				<BugFilter submitHandler={this.loadData} initFilter={this.props.location.query} />
+				<BugFilter submitHandler={this.changeFilter} initFilter={this.props.location.query} />
 				<hr />
 				<BugTable bugs={this.state.bugs} />
 				<hr />
