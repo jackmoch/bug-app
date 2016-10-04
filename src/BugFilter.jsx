@@ -43,7 +43,14 @@ const BugFilter = React.createClass({
 	},
 
 	submit: function(e) {
-		this.props.submitHandler({priority: this.state.priority, status: this.state.status})
+		const newFilter = {}
+		if (this.state.priority) {
+			newFilter.priority = this.state.priority
+		}
+		if (this.state.status) {
+			newFilter.status = this.state.status
+		}
+		this.props.submitHandler(newFilter)
 	}
 })
 
