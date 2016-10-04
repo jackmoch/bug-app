@@ -2,7 +2,7 @@
 
 const express = require('express')
 const { json } = require('body-parser')
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectID } = require('mongodb')
 
 const app = express()
 let db
@@ -35,6 +35,12 @@ app.post('/api/bugs/', (req, res) => {
 		db.collection('bugs').find({_id: newId}).next((err, doc) => {
 			res.json(doc)
 		})
+	})
+})
+
+app.get('/api/bugs/:id', (req, res) => {
+	db.collection('bugs').findOne({_id: ObjectID(req.params.id)}, function(err, bug) {
+		res.json(bug)
 	})
 })
 
