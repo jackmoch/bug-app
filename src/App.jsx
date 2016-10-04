@@ -1,14 +1,15 @@
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
-var Redirect = require('react-router').Redirect;
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Router = require('react-router').Router;
+const Route = require('react-router').Route;
+const Redirect = require('react-router').Redirect;
+const hashHistory = require('react-router').hashHistory
 
-var BugList = require('./BugList');
+const BugList = require('./BugList');
 
-var NoMatch = React.createClass({
+const NoMatch = React.createClass({
   render: function() {
     return (
       <h2>No match for the route</h2>
@@ -18,7 +19,7 @@ var NoMatch = React.createClass({
 
 ReactDOM.render(
   (
-    <Router>
+    <Router history={hashHistory}>
       <Route path="/bugs" component={BugList} />
       <Redirect from="/" to="/bugs" />
       <Route path="*" component={NoMatch} />
