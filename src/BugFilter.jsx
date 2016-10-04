@@ -6,8 +6,12 @@ const ReactDOM = require('react-dom')
 const BugFilter = React.createClass({
 	render: function() {
 		return(
-			<div>Will be a filter bugs</div>
+			<button onClick={this.submit}>Test Filter</button>
 		)
+	},
+
+	submit: function(e) {
+		this.props.submitHandler({priority: 'P1'})
 	}
 })
 
