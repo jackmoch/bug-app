@@ -5,7 +5,7 @@ const ReactDOM = require('react-dom')
 
 const BugFilter = React.createClass({
 	render: function() {
-		console.log('Rendering BugFilter, state=' this.state)
+		console.log('Rendering BugFilter, state=', this.state)
 		return(
 			<div>
 				<h3>Filter</h3>
@@ -39,7 +39,7 @@ const BugFilter = React.createClass({
 		if (newProps.initFilter.status === this.state.status && newProps.initFilter.priority === this.state.priority) {
 			console.log('Bug Filter: component will recieve no props, no change')
 		} 
-		console.log('Bug Filter: component will recieve props, new filter:' newProps.initFilter)
+		console.log('Bug Filter: component will recieve props, new filter:', newProps.initFilter)
 		this.setState({status: newProps.initFilter.status, priority: newProps.initFilter.priority})
 	},
 

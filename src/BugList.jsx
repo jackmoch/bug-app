@@ -105,7 +105,7 @@ const BugList = React.createClass({
 	},
  
 	render: function() {
-		console.log('Rendering Bug List, num items' this.state.bugs.length)
+		console.log('Rendering Bug List, num items', this.state.bugs.length)
 		return(
 			<div>
 				<h1>Bug Tracker</h1>
