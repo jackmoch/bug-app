@@ -75,23 +75,37 @@ const BugList = React.createClass({
 	},
 
 	componentDidMount: function() {
-		this.loadData({})
+		console.log('Bug List: component did mount')
+		this.loadData()
 	},
 
-	loadData: function(filter) {
+	componentDidUpdate: function(prevProps) {
+		const oldQuery = prevProps.location.query 
+		const newQuery = this.props.location.query
+		if (oldQuery.priority === newQuery.priority && oldQuery.status === newQuery.status) {
+			console.log("BugList: componentDidUpdate, no change in filter, not updating")
+			return
+		} else {
+			console.log("BugList: componentDidUpdate, loading data with new filter")
+			this.loadData()
+		}
+	},
+
+	loadData: function() {
+		const query = this.props.location.query || {}
+		const filter = {priority: query.priority, status: query.status}
 		$.ajax('/api/bugs', {data: filter}).done(function(data) {
 			this.setState({bugs: data})
 		}.bind(this))
 	},
 
 	changeFilter: function(newFilter) {
-		console.log(newFilter)
-		console.log('WITH PARAM',$.param(newFilter))
 		this.props.history.push({search: '?' + $.param(newFilter)})
 		this.loadData(newFilter)
 	},
  
 	render: function() {
+		console.log('Rendering Bug List, num items' this.state.bugs.length)
 		return(
 			<div>
 				<h1>Bug Tracker</h1>
