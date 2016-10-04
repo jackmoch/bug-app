@@ -57,7 +57,6 @@ const BugList = React.createClass({
 	},
 
 	addBug: function(bugObj) {
-		console.log(bugObj)
 
 		$.ajax({
 			type: 'POST',
@@ -65,7 +64,6 @@ const BugList = React.createClass({
 			contentType: 'application/json',
 			data: JSON.stringify(bugObj),
 			success: function (data) {
-				console.log(data)
 				const bug = data
 				const bugsModified = this.state.bugs.concat(bug)
 				this.setState({bugs: bugsModified})
@@ -77,7 +75,11 @@ const BugList = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$.ajax('/api/bugs').done(function(data) {
+		this.loadData({})
+	},
+
+	loadData: function(filter) {
+		$.ajax('/api/bugs', {data: filter}).done(function(data) {
 			this.setState({bugs: data})
 		}.bind(this))
 	},
@@ -86,7 +88,7 @@ const BugList = React.createClass({
 		return(
 			<div>
 				<h1>Bug Tracker</h1>
-				<BugFilter />
+				<BugFilter submitHandler={this.loadData} />
 				<hr />
 				<BugTable bugs={this.state.bugs} />
 				<hr />
